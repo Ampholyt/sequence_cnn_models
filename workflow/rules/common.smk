@@ -2,8 +2,6 @@
 #### Global functions       ####
 ################################
 import os
-RESOURCES_DIR = os.path.abspath("../../resources")
-SCRIPTS_DIR = "../scripts"
 
 def getScript(name):
     return os.path.join(os.path.dirname(workflow.main_snakefile), 'scripts', name)
@@ -54,8 +52,7 @@ def getWrapperPath(file):
     """
     Get directory for snakemake wrappers.
     """
-    abs_path = os.path.abspath(os.path.join(config["wrapper_directory"], file))
-    return abs_path
+    return os.path.abspath(os.path.join(config["wrapper_directory"], file))
 
 
 def isPretrained():

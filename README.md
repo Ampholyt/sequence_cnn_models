@@ -29,9 +29,9 @@ If you use this workflow in a paper, don't forget to give credits to the authors
 
 Snakemake manages dependencies automatically via conda, please update `workflow\envs\` files accordingly.
 
-Please download a copy of [Snakemake Wrappers](https://github.com/snakemake/snakemake-wrappers) in the `resources\` directory or update the `config.yml` file accordingly.
+Please download a copy of [Snakemake Wrappers](https://github.com/kircherlab/snakemake_wrappers) in the `resources\` directory or update the `config.yml` file accordingly. Note, please **do not** confues this with the snakemake-wrappers [package](https://github.com/snakemake/snakemake-wrappers).
 
-The workflow also requires a reference genome in 1. .genome format, and 2. .fasta format. 
+The workflow also requires a reference genome in 1. .genome format, and 2. .fasta format.
 Please download the reference genome in the `resources\` directory or update the `config.yml` file accordingly.
 
 ### Step 1: Obtain a copy of this workflow
@@ -130,10 +130,10 @@ Let's try to run the workflow with the demo data provided in the `resources\` di
 ### Input files
 
 The input files are in the `resources\demo\` directory. The input files are as follows:
-    
+
     1. `resources\demo\example_sequences.fa` - contains the DNA sequences in fasta format
-    
-    2. `resources\demo\example_labels.tsv` - contains 3 columns i.e., 'BIN', 'ID', and, 'MEAN' (value1*) in tsv format. 
+
+    2. `resources\demo\example_labels.tsv` - contains 3 columns i.e., 'BIN', 'ID', and, 'MEAN' (value1*) in tsv format.
 
 The 'BIN' column contains the bin number (1-10) and the 'ID' column contains the sequence ID. The 'ID' column should match the sequence ID in the fasta file. The 'MEAN' column contains the mean value of the log(RNA/DNA). Adding more columns is possible, as additional values which starts a multi-task learning.
 
@@ -152,7 +152,7 @@ wrapper_directory: resources/snakemake_wrappers
 reference:
   genome: resources/example.fa.genome # genome file .genome
   fasta: resources/example.fa # genome file .fa
-...  
+...
 ```
 
 3. Add the path of the input files as follows:
@@ -162,9 +162,9 @@ input:
   fasta: resources/demo/example_sequences.fa
   labels: resources/demo/example_labels.tsv
 ...
-```  
+```
 
-### Run the workflow 
+### Run the workflow
 
 Run as follows (if the device has GPU, snakemake will automatically detect it and run the workflow on GPU):
 ```bash
@@ -182,7 +182,7 @@ Complete log: .snakemake/log/20XX-XX-27T155007.853000.snakemake.log
 
 ### Expected Output
 
-The output files are now in the `results\` directory. 
+The output files are now in the `results\` directory.
 ```html
     sequence_cnn_models/results/
         ├── correlation
@@ -191,10 +191,10 @@ The output files are now in the `results\` directory.
             ├── finalConcat.labels.cleaned.tsv.gz
             ...
         ├── regression_input (Train, test and validation input files used for training)
-        └── training (Performance of fitted models, log.tsv files, *model.json*, *model.h5*, etc.) 
+        └── training (Performance of fitted models, log.tsv files, *model.json*, *model.h5*, etc.)
 ```
 
-The file `results/predictions/finalConcat.labels.cleaned.tsv.gz` contains the predicted values for the input sequences. 
+The file `results/predictions/finalConcat.labels.cleaned.tsv.gz` contains the predicted values for the input sequences.
 
 The file `results/correlation/regression.MEAN.tsv.gz` contains the correlation between predicted and observed values.
 

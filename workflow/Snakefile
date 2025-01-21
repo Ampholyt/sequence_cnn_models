@@ -23,8 +23,7 @@ module wrappers:
     Import wrapper repository.
     """
     snakefile:
-        "%s/Snakefile" % config["wrapper_directory"]
-
+        os.path.join("/".join(os.path.dirname(workflow.main_snakefile).split("/")[:-1]), config["wrapper_directory"], 'Snakefile')
 
 include: "rules/common.smk"
 include: "rules/sequence_selection_common.smk"
