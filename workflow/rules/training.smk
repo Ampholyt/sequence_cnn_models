@@ -75,7 +75,6 @@ else:
             else "",
         conda:
             "../envs/tensorflow.yml"
-        threads: 25
         shell:
             """
             python {input.script} \

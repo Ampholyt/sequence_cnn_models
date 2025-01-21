@@ -1,48 +1,58 @@
 ---
 __default__:
-  time: "0-00:20"
-  threads: 1
-  mem: 2G
-  queue: debug
-  error: "logs/%x_%j_%N.err"
-  output: "logs/%x_%j_%N.log"
+    time: "0-00:20:00"
+    threads: 1
+    mem: 2G
+    queue: debug
+    error: "logs/%x_%j_%N.err"
+    output: "logs/%x_%j_%N.log"
+regression_input_get_training:
+    time: "0-02:00"
+    threads: 1
+    mem: 5G
+    queue: short
+regression_input_get_test:
+    time: "0-02:00"
+    threads: 1
+    mem: 5G
+    queue: short
 sequence_selection_negative_background_widnows:
-  time: "0-01:00"
-  threads: 1
-  mem: 10G
+    time: "0-01:00:00"
+    threads: 1
+    mem: 10G
 sequence_selection_negative_background_input:
-  time: "0-01:00"
-  threads: 1
-  mem: 10G
+    time: "0-01:00"
+    threads: 1
+    mem: 10G
 sequence_selection_negative_background_sampler:
-  time: "0-01:00"
-  threads: 1
-  mem: 20G
+    time: "0-01:00"
+    threads: 1
+    mem: 20G
 training_multitask:
-  time: "5-00:00"
-  mem: 30G
-  threads: 25
-  queue: gpu --gres=gpu:tesla:4
-predict_fromFasta:
-  time: "0-02:00"
-  mem: 30G
-  threads: 1
-  queue: gpu --gres=gpu:tesla:1
-training_regression:
-    time: "0-08:00"
+    time: "5-00:00"
     mem: 30G
     threads: 25
-    queue: gpu --gres=gpu:tesla:4
+    queue: gpu --gres=gpu:tesla:2
+predict_fromFasta:
+    time: "0-02:00"
+    mem: 30G
+    threads: 1
+    queue: gpu --gres=gpu:tesla:1
+training_regression:
+    time: "0-08:00"
+    mem: 10G
+    threads: 1
+    queue: gpu --gres=gpu:tesla:1
 predict_regression:
     time: "0-02:00"
     mem: 30G
     threads: 1
     queue: gpu --gres=gpu:tesla:1
 model_interpretation_runBackgroundSampler:
-  time: "0-10:00"
-  threads: 4
-  mem: 80G
-  queue: medium
+    time: "0-10:00"
+    threads: 4
+    mem: 80G
+    queue: medium
 model_interpretation_deepexplain:
     time: "1-00:00"
     mem: 30G

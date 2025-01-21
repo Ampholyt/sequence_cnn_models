@@ -1,14 +1,12 @@
 ################################
 #### Global functions       ####
 ################################
-from snakemake.workflow import srcdir
-
-SCRIPTS_DIR = srcdir("../scripts")
-RESOURCES_DIR = srcdir("../../resources")
-
+import os
+RESOURCES_DIR = os.path.abspath("../../resources")
+SCRIPTS_DIR = "../scripts"
 
 def getScript(name):
-    return "%s/%s" % (SCRIPTS_DIR, name)
+    return os.path.join(os.path.dirname(workflow.main_snakefile), 'scripts', name)
 
 
 from snakemake.utils import validate
@@ -56,7 +54,8 @@ def getWrapperPath(file):
     """
     Get directory for snakemake wrappers.
     """
-    return "%s/%s" % (config["wrapper_directory"], file)
+    abs_path = os.path.abspath(os.path.join(config["wrapper_directory"], file))
+    return abs_path
 
 
 def isPretrained():

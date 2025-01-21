@@ -216,7 +216,7 @@ rule model_interpretation_ism:
 ## tf-modisco-ism
 rule model_interpretation_ism_concat:
     conda:
-        "../envs/tfmodisco.yml"
+        "../envs/tfmodisco-lite.yml"
     input:
         scores=lambda wc: expand(
             "results/model_interpretation/ism/scores.{{test_fold}}.{validation_fold}.h5",
@@ -237,26 +237,26 @@ rule model_interpretation_ism_concat:
         """
 
 
-rule model_interpretation_tfmodisco_ism:
-    conda:
-        "../envs/tfmodisco.yml"
-    input:
-        scores=expand(
-            "results/model_interpretation/ism/scores_concat.{test_fold}.h5",
-            test_fold=list(range(1, 11)),
-        ),
-        script=getScript("tfmodisco_single_task.py"),
-    output:
-        hdf5="results/model_interpretation/ism/tfmodisco/tfmodisco.hdf5",
-    log:
-        "logs/model_interpretation/tfmodisco_ism.log",
-    shell:
-        """
-        scores=`for i in {input.scores}; do echo "--scores $i"; done`;
-        python {input.script} \
-        `echo $scores` \
-        --output {output.hdf5}  &> {log}
-        """
+# rule model_interpretation_tfmodisco_ism:
+#     conda:
+#         "../envs/tfmodisco.yml"
+#     input:
+#         scores=expand(
+#             "results/model_interpretation/ism/scores_concat.{test_fold}.h5",
+#             test_fold=list(range(1, 11)),
+#         ),
+#         script=getScript("tfmodisco_single_task.py"),
+#     output:
+#         hdf5="results/model_interpretation/ism/tfmodisco/tfmodisco.hdf5",
+#     log:
+#         "logs/model_interpretation/tfmodisco_ism.log",
+#     shell:
+#         """
+#         scores=`for i in {input.scores}; do echo "--scores $i"; done`;
+#         python {input.script} \
+#         `echo $scores` \
+#         --output {output.hdf5}  &> {log}
+#         """
 
 
 rule model_interpretation_tfmodisco_lite_ism:
@@ -306,26 +306,26 @@ rule model_interpretation_tfmodisco_lite_report_ism:
 ## tf-modisco1
 
 
-rule model_interpretation_tfmodisco1:
-    conda:
-        "../envs/tfmodisco.yml"
-    input:
-        scores="results/model_interpretation/ism/scores.{test_fold}.{validation_fold}.h5",
-        script=getScript("tf_modisco.py"),
-    output:
-        hdf5="results/model_interpretation/ism/tfmodisco/tfModisco.{test_fold}.{validation_fold}.hdf5",
-        fig_dir=directory(
-            "results/model_interpretation/ism/tfmodisco/figures.{test_fold}.{validation_fold}/"
-        ),
-    log:
-        "logs/model_interpretation/tfmodisco1.{test_fold}.{validation_fold}.log",
-    shell:
-        """
-        python {input.script} \
-        --input {input.scores} \
-        --output {output.hdf5} \
-        --output-figures-dir {output.fig_dir} &> {log}
-        """
+# rule model_interpretation_tfmodisco1:
+#     conda:
+#         "../envs/tfmodisco.yml"
+#     input:
+#         scores="results/model_interpretation/ism/scores.{test_fold}.{validation_fold}.h5",
+#         script=getScript("tf_modisco.py"),
+#     output:
+#         hdf5="results/model_interpretation/ism/tfmodisco/tfModisco.{test_fold}.{validation_fold}.hdf5",
+#         fig_dir=directory(
+#             "results/model_interpretation/ism/tfmodisco/figures.{test_fold}.{validation_fold}/"
+#         ),
+#     log:
+#         "logs/model_interpretation/tfmodisco1.{test_fold}.{validation_fold}.log",
+#     shell:
+#         """
+#         python {input.script} \
+#         --input {input.scores} \
+#         --output {output.hdf5} \
+#         --output-figures-dir {output.fig_dir} &> {log}
+#         """
 
 
 rule model_interpretation_tfmodisco2:
