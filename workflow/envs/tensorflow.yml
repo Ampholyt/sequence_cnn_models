@@ -2,7 +2,6 @@
 channels:
   - conda-forge
   - bioconda
-  - anaconda
 dependencies:
   - click==8.1.8
   - kipoi==0.8.6
